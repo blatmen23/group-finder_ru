@@ -4,23 +4,25 @@ class Router
 {
     private $pages = array();
 
-    function addRoute($url, $path) {
+    function addRoute($url, $path)
+    {
         $this->pages[$url] = $path;
     }
 
-    function route($url){
+    function route($url)
+    {
         $path = $this->pages[$url];
-        $file_dir = "pages/". $path;
+        $file_dir = "pages/" . $path;
 
-        if ($path == ""){
-            require "404.php";
+        if ($path == "") {
+            require __DIR__ . "/../pages/error 404.php";
             die();
         }
 
         if (file_exists($file_dir)) {
             require $file_dir;
         } else {
-            require "404.php";
+            require __DIR__ . "/../pages/error 404.php";
             die();
         }
     }
