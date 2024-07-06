@@ -1,0 +1,57 @@
+<?php
+require_once  __DIR__ . '/../src/helper.php';
+
+if (!isset($_SESSION['results']) && !isset($_SESSION['warning'])) {
+    redirect("/");
+}
+?>
+
+<!doctype html>
+<html lang="ru">
+<?php
+$title = "GroupFinder: Ответ";
+require_once __DIR__ . "/../components/head.php";
+?>
+
+<body>
+<div class="wrapper">
+    <?php
+    require_once __DIR__ . "/../components/header.php";
+    ?>
+    <div class="work-space">
+        <div class="block-space">
+            <?php
+//            echo "<pre>";
+//            var_dump($_SESSION);
+//            echo "<br>";
+//            echo $_SESSION['warning'];
+            if (isset($_SESSION['warning'])) {
+                echo $_SESSION['warning'];
+            } else {
+                $users_emoji = json_decode(file_get_contents( __DIR__ . "/../src/users_emoji.json"), true);
+//                print_r($users_emoji);
+//                echo "<br>";
+//                print_r(array_keys($users_emoji));
+//                echo "<br>";
+                $results = $_SESSION['results'];
+                foreach ($results as $result) {
+//                print_r($result);
+//                echo "<br>";
+                    if (isset($users_emoji[$result[9]])) {
+                        $student = $result[8] . " " . $users_emoji[$result[9]];
+                    } else {
+                        $student = $result[8];
+                    }
+                    $group = $result[6];
+                    require __DIR__ . "/../components/response-row.php";
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+require_once __DIR__ . "/../components/footer.php";
+?>
+</body>
+</html>
