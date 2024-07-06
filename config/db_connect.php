@@ -3,7 +3,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database = "group-finder";
+$database = "s_parser";
 
 $mysqli = mysqli_connect($hostname, $username, $password, $database);
 

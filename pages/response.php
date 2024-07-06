@@ -14,44 +14,46 @@ require_once __DIR__ . "/../components/head.php";
 ?>
 
 <body>
-<div class="wrapper">
-    <?php
-    require_once __DIR__ . "/../components/header.php";
-    ?>
-    <div class="work-space">
-        <div class="block-space">
-            <?php
-//            echo "<pre>";
-//            var_dump($_SESSION);
-//            echo "<br>";
-//            echo $_SESSION['warning'];
-            if (isset($_SESSION['warning'])) {
-                echo $_SESSION['warning'];
-            } else {
-                $users_emoji = json_decode(file_get_contents( __DIR__ . "/../src/users_emoji.json"), true);
-//                print_r($users_emoji);
-//                echo "<br>";
-//                print_r(array_keys($users_emoji));
-//                echo "<br>";
-                $results = $_SESSION['results'];
-                foreach ($results as $result) {
-//                print_r($result);
-//                echo "<br>";
-                    if (isset($users_emoji[$result[9]])) {
-                        $student = $result[8] . " " . $users_emoji[$result[9]];
-                    } else {
-                        $student = $result[8];
+    <div class="wrapper">
+        <?php
+        require_once __DIR__ . "/../components/header.php";
+        ?>
+        <div class="work-space">
+            <div class="block-space">
+                <?php
+                // echo "<pre>";
+                // var_dump($_SESSION);
+                // echo "<br>";
+                // echo $_SESSION['warning'];
+                if (isset($_SESSION['warning'])) {
+                    echo $_SESSION['warning'];
+                } else {
+                    $users_emoji = json_decode(file_get_contents(__DIR__ . "/../src/users_emoji.json"), true);
+                    //                print_r($users_emoji);
+                    //                echo "<br>";
+                    //                print_r(array_keys($users_emoji));
+                    //                echo "<br>";
+                    $results = $_SESSION['results'];
+                    foreach ($results as $result) {
+                        //                print_r($result);
+                        //                echo "<br>";
+                        // student_id	student_name	student_group	leader	group_id	group_name	institute	course	institute_id	institute_name	institute_num	course_id	course_name
+                        if (isset($users_emoji[$result[9]])) {
+                            $student = $result[1] . " " . $users_emoji[$result[0]];
+                        } else {
+                            $student = $result[1];
+                        }
+                        $group = $result[5];
+                        require __DIR__ . "/../components/response-row.php";
                     }
-                    $group = $result[6];
-                    require __DIR__ . "/../components/response-row.php";
                 }
-            }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
-</div>
-<?php
-require_once __DIR__ . "/../components/footer.php";
-?>
+    <?php
+    require_once __DIR__ . "/../components/footer.php";
+    ?>
 </body>
+
 </html>
