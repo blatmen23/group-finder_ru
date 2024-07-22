@@ -118,6 +118,20 @@ footer a {
   /*border-bottom: 2px solid rgb(173, 222, 205);*/
 }
 
+.label-info {
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  color: white;
+  background-color: #12718f;
+  border-radius: 3px;
+  vertical-align: text-top;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
 @media (max-width: 1200px) {
   :root {
     --container-width: 60vw;
