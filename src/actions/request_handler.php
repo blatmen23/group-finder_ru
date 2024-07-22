@@ -54,17 +54,18 @@ require_once __DIR__ . "/../../config/db_connect.php";
 
 if (ctype_digit($search_query)) {
     // $sql_query = "SELECT * FROM `kai-students_new` WHERE `student-group` LIKE '%" . $search_query . "%' AND `institute-num` IN " . $institutes . " AND `course` IN " . $courses . " ORDER BY `student` " . $choose_from;
-    $sql_query = <<<EOD
-    SELECT *
-    FROM Students
-        JOIN StudentGroups ON student_group = group_id
-        JOIN Institutes ON institute = institute_id
-        JOIN Courses ON course = course_id
-    WHERE group_name LIKE '%$search_query%'
-        AND institute_num IN $institutes
-        AND course_name IN $courses
-    ORDER BY student_name $choose_from;   
-    EOD;
+    $sql_query = "SELECT * FROM Students JOIN StudentGroups ON student_group = group_id JOIN Institutes ON institute = institute_id JOIN Courses ON course = course_id WHERE group_name LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course_name IN " .  $courses . "ORDER BY student_name " . $choose_from . ";";
+    // $sql_query = <<<EOT
+    // SELECT *
+    // FROM Students
+    //     JOIN StudentGroups ON student_group = group_id
+    //     JOIN Institutes ON institute = institute_id
+    //     JOIN Courses ON course = course_id
+    // WHERE group_name LIKE '%$search_query%'
+    //     AND institute_num IN $institutes
+    //     AND course_name IN $courses
+    // ORDER BY student_name $choose_from;   
+    // EOT;
     // CHECK GROUP
     $groups_response = mysqli_fetch_all(mysqli_query($mysqli, "SELECT DISTINCT group_name FROM StudentGroups;"));
     $all_groups = [];
@@ -79,17 +80,18 @@ if (ctype_digit($search_query)) {
     }
 } else {
     // $sql_query = "SELECT * FROM `kai-students_new` WHERE `student` LIKE '%" . $search_query . "%' AND `institute-num` IN " . $institutes . " AND `course` IN " . $courses . " ORDER BY `" . $type_of_sort . "` " . $choose_from;
-    $sql_query = <<<EOD
-    SELECT *
-    FROM Students
-        JOIN StudentGroups ON student_group = group_id
-        JOIN Institutes ON institute = institute_id
-        JOIN Courses ON course = course_id
-    WHERE student_name LIKE '%$search_query%'
-        AND institute_num IN $institutes
-        AND course_name IN $courses
-    ORDER BY $type_of_sort $choose_from;   
-    EOD;
+    $sql_query = "SELECT * FROM Students JOIN StudentGroups ON student_group = group_id JOIN Institutes ON institute = institute_id JOIN Courses ON course = course_id WHERE student_name LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course_name IN " .  $courses . "ORDER BY " . $type_of_sort . " " . $choose_from . ";";
+    // $sql_query = <<<EOTzW
+    // SELECT *
+    // FROM Students
+    //     JOIN StudentGroups ON student_group = group_id
+    //     JOIN Institutes ON institute = institute_id
+    //     JOIN Courses ON course = course_id
+    // WHERE student_name LIKE '%$search_query%'
+    //     AND institute_num IN $institutes
+    //     AND course_name IN $courses
+    // ORDER BY $type_of_sort $choose_from;   
+    // EOT;
 }
 
 

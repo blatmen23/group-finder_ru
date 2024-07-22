@@ -70,9 +70,9 @@ body {
   grid-column-gap: 10px;
 }
 
-.filters,
+/* .filters,
 .sorting {
-}
+} */
 
 .filter,
 .sort {
@@ -92,10 +92,6 @@ footer .container {
   display: flex;
   justify-content: space-between;
   align-items: end;
-}
-
-footer .copyright {
-  /*background-color: #383838;*/
 }
 
 footer a {

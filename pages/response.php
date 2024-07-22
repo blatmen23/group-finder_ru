@@ -38,7 +38,7 @@ require_once __DIR__ . "/../components/head.php";
                         //                print_r($result);
                         //                echo "<br>";
                         // student_id	student_name	student_group	leader	group_id	group_name	institute	course	institute_id	institute_name	institute_num	course_id	course_name
-                        if (isset($users_emoji[$result[9]])) {
+                        if (isset($users_emoji[$result[0]])) {
                             $student = $result[1] . " " . $users_emoji[$result[0]];
                         } else {
                             $student = $result[1];
