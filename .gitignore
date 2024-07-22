@@ -1,6 +1,7 @@
 composer.phar
 /vendor/
 config/smtp_config.php
+config/db_connect.php
 src/users_emoji.json
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
