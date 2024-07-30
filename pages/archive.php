@@ -1,11 +1,17 @@
 <?php
 require_once  __DIR__ . '/../src/helper.php';
+
+require_once __DIR__ . '/../config/db_config.php';
+require_once __DIR__ . '/../src/db_manager.php';
+
+$db_manager = new DatabaseManager($hostname, $username, $password, $database);
+$db_manager->connect_db();
 ?>
 
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Поиск студентов КНИТУ-КАИ";
+$title = "GroupFinder: Архив студентов КНИТУ-КАИ";
 require_once __DIR__ . "/../components/head.php";
 ?>
 
@@ -18,18 +24,18 @@ require_once __DIR__ . "/../components/head.php";
             <main id="moving-parent_1">
                 <div class="block-space">
                     <div class="manual__main">
-                        <p class="title-block__main"><b>Краткое руководство</b></p>
-                        <p>1. Введите фамилию, имя или отчество студента (можно все сразу) без ошибок.</p>
-                        <p>2. Если вы хотите найти студента по номеру группы, введите номер группы в поисковую строку.
-                        </p>
-                        <p>3. Настройте фильтры, чтобы уточнить результаты поиска.</p>
+                        <p class="title-block__main"><b>О странице</b></p>
+                        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.</p>
+                        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Lorem
+                            прямо злых но вдали!</p>
+                        <p>Искать среди <?= $db_manager->get_quantity_records() ?> записей в архиве.</p>
                     </div>
 
                     <p class="validation-message__main"><?= getValidationErrorMessage() ?></p>
-                    <form class="search__main" name="search-request" id="search-request" action="/src/actions/response_handler.php" method="post">
+                    <form class="search__main" name="search-request" id="search-request" action="/src/actions/archive_handler.php" method="post">
                         <div class="search-box__form">
                             <label class="search-input">
-                                <input name="search-query" id="input-search-query" type="text" maxlength="70" placeholder="Введите запрос" value="<?= getOldValue() ?>" />
+                                <input name="search-query" id="input-search-query" type="text" maxlength="70" placeholder="Можно оставить пустым" value="<?= getOldValue() ?>" />
                             </label>
 
                             <button type="submit" class="search-button">
@@ -46,28 +52,13 @@ require_once __DIR__ . "/../components/head.php";
                     <div class="filters-box__form">
                         <p class="title-block__main"><b>Фильтры поиска</b></p>
                         <div class="filters">
-                            <label class="filter" for="institutes">
-                                <span>Институт (6/6)</span>
-                                <select id="institutes" name="institutes[]" form="search-request" size="7" multiple>
-                                    <option value="0" selected>Выбрать всё</option>
-                                    <option value="1" selected>1 ИАНТЭ</option>
-                                    <option value="2" selected>2 ФМФ</option>
-                                    <option value="3" selected>3 ИАЭП</option>
-                                    <option value="4" selected>4 ИКТЗИ</option>
-                                    <option value="5" selected>5 ИРЭФ-ЦТ</option>
-                                    <option value="6" selected>6 ИИЭиП</option>
-                                </select>
+                            <label class="filter" for="period_from">
+                                <span>Период с:</span>
+                                <input type="date" id="period_from" name="period_from" value="<?= $db_manager->get_first_record_date(); ?>" min="<?= $db_manager->get_first_record_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
-                            <label class="filter" for="courses">
-                                <span>Курс (5/5)</span>
-                                <select id="courses" name="courses[]" form="search-request" size="6" multiple>
-                                    <option value="0" selected>Выбрать всё</option>
-                                    <option value="1" selected>1</option>
-                                    <option value="2" selected>2</option>
-                                    <option value="3" selected>3</option>
-                                    <option value="4" selected>4</option>
-                                    <option value="5" selected>5</option>
-                                </select>
+                            <label class="filter" for="period_before">
+                                <span>Период до:</span>
+                                <input type="date" id="period_before" name="period_before" value="<?= date('Y-m-d', time()); ?>" min="<?= $db_manager->get_first_record_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
                         </div>
                     </div>
@@ -79,8 +70,9 @@ require_once __DIR__ . "/../components/head.php";
                             <label class="sort" for="alph">
                                 <span>Сортировать </span>
                                 <select id="type-of-sort" name="type-of-sort" form="search-request">
-                                    <option value="group_name">по группе</option>
+                                    <option value="record_time">по времени</option>
                                     <option value="student_name">по имени</option>
+                                    <option value="group_name">по группе</option>
                                 </select>
                             </label>
                             <label class="sort" for="alph">
@@ -100,7 +92,7 @@ require_once __DIR__ . "/../components/head.php";
     require_once __DIR__ . "/../components/footer.php";
     ?>
     <script src="/js/adaptive_from_device.js"></script>
-    <script src="/js/selectors.js"></script>
+    <script src="/js/date_period_picker.js"></script>
     <script src="/js/search_bar.js"></script>
 </body>
 

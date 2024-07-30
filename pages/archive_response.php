@@ -9,7 +9,7 @@ if (!isset($_SESSION['results'])) {
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Результаты поиска";
+$title = "GroupFinder: Результаты поиска в архиве";
 require_once __DIR__ . "/../components/head.php";
 ?>
 

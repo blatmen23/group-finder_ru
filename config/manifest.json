@@ -3,7 +3,7 @@
   "short_name": "GroupFinder",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "##f0ffff",
+  "background_color": "#f0ffff",
   "theme_color": "#00BFE6",
   "icons": [
     {

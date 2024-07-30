@@ -15,14 +15,14 @@ class Router
         $file_dir = "pages/" . $path;
 
         if ($path == "") {
-            require __DIR__ . "/../pages/error 404.php";
+            require "pages/error 404.php";
             die();
         }
 
         if (file_exists($file_dir)) {
             require $file_dir;
         } else {
-            require __DIR__ . "/../pages/error 404.php";
+            require "pages/error 404.php";
             die();
         }
     }
