@@ -28,6 +28,23 @@ class Handler
 
         send_mail($smtp_settings['smtp_settings'], $smtp_settings['to'], $subject, $this->body);
     }
+
+    protected function complete_result($results)
+    {
+        $users_emoji = json_decode(file_get_contents(__DIR__ . "/../config/users_emoji.json"), true);
+
+        foreach ($results as &$result) {
+            if (isset($users_emoji[$result["student_id"]])) {
+                $result["student_name"] .= " " . $users_emoji[$result["student_id"]];
+            }
+        }
+
+        // Сброс указателя после использования ссылочной переменной
+        unset($result);
+
+        // Возвращаем исходный массив $results, который теперь изменён
+        return $results;
+    }
 }
 
 class Response extends Handler
@@ -95,16 +112,18 @@ class Response extends Handler
                 array_push($results, $chunk_data);
             }
             setOldValue($this->search_query);
-            $_SESSION['results'] = $results;
         } elseif (mysqli_num_rows($response) == 0) {
             setOldValue($this->search_query);
-            $_SESSION['results'] = "NOT FOUND";
+            $results = "NOT FOUND";
         } else {
             setValidationError('Возникла непредвиденная ошибка');
             setOldValue($this->search_query);
             redirect('/archive');
         }
 
+        if ($results != "NOT FOUND") {
+            $results = parent::complete_result($results);
+        }
         return $results;
     }
 }
@@ -156,16 +175,18 @@ class Archive extends Handler
                 array_push($results, $chunk_data);
             }
             setOldValue($this->search_query);
-            $_SESSION['results'] = $results;
         } elseif (mysqli_num_rows($response) == 0) {
             setOldValue($this->search_query);
-            $_SESSION['results'] = "NOT FOUND";
+            $results = "NOT FOUND";
         } else {
             setValidationError('Возникла непредвиденная ошибка');
             setOldValue($this->search_query);
             redirect('/archive');
         }
 
+        if ($results != "NOT FOUND") {
+            $results = parent::complete_result($results);
+        }
         return $results;
     }
 }

@@ -9,13 +9,12 @@ require_once __DIR__ . "/../handler.php";
 
 $handler = new Response($search_query, $institutes, $courses, $choose_from, $type_of_sort);
 
-echo "<pre>";
-var_dump($handler);
-
 $handler->validation();
+
+$handler->send_email();
 
 $results = $handler->get_results();
 
-$handler->send_email();
+$_SESSION['results'] = $results;
 
 redirect('/response');

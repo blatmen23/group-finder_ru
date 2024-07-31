@@ -58,9 +58,9 @@ class DatabaseManager
         return $this->db->query("SELECT COUNT(record_time) as quantity FROM StudentArchive;")->fetch_row()[0];
     }
 
-    public function get_first_record_date()
+    public function get_archive_table_create_date()
     {
-        return $this->db->query("SELECT CAST(record_time AS DATE) AS record_date FROM StudentArchive ORDER BY record_time ASC LIMIT 1;")->fetch_row()[0];
+        return $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 's_parser' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
     }
 
     public function get_archive_students($search_query, $period_from, $period_before, $choose_from, $type_of_sort)

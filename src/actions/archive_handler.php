@@ -11,8 +11,10 @@ $handler = new Archive($search_query, $period_from, $period_before, $choose_from
 
 $handler->validation();
 
+$handler->send_email();
+
 $results = $handler->get_results();
 
-$handler->send_email();
+$_SESSION['results'] = $results;
 
 redirect('/archive_response');

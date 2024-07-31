@@ -25,10 +25,13 @@ require_once __DIR__ . "/../components/head.php";
                 <div class="block-space">
                     <div class="manual__main">
                         <p class="title-block__main"><b>О странице</b></p>
-                        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.</p>
-                        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Lorem
-                            прямо злых но вдали!</p>
-                        <p>Искать среди <?= $db_manager->get_quantity_records() ?> записей в архиве.</p>
+                        <p>Архив студентов КНИТУ-КАИ - ещё одна страница нашего сайта, открывающяя доступ ко всем бывшим
+                            студентам нашего ВУЗа.</p>
+                        <p>Записи ведутся с
+                            <?php
+                            $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $db_manager->get_archive_table_create_date())->getTimestamp();
+                            echo date("d.m.Y", $timestamp);
+                            ?> и на данный момент в архиве <?= $db_manager->get_quantity_records() ?> записей.</p>
                     </div>
 
                     <p class="validation-message__main"><?= getValidationErrorMessage() ?></p>
@@ -54,11 +57,11 @@ require_once __DIR__ . "/../components/head.php";
                         <div class="filters">
                             <label class="filter" for="period_from">
                                 <span>Период с:</span>
-                                <input type="date" id="period_from" name="period_from" value="<?= $db_manager->get_first_record_date(); ?>" min="<?= $db_manager->get_first_record_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
+                                <input type="date" id="period_from" name="period_from" value="<?= $db_manager->get_archive_table_create_date(); ?>" min="<?= $db_manager->get_archive_table_create_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
                             <label class="filter" for="period_before">
                                 <span>Период до:</span>
-                                <input type="date" id="period_before" name="period_before" value="<?= date('Y-m-d', time()); ?>" min="<?= $db_manager->get_first_record_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
+                                <input type="date" id="period_before" name="period_before" value="<?= date('Y-m-d', time()); ?>" min="<?= $db_manager->get_archive_table_create_date(); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
                         </div>
                     </div>
