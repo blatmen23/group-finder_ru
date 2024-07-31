@@ -58,10 +58,14 @@ class DatabaseManager
         return $this->db->query("SELECT COUNT(record_time) as quantity FROM StudentArchive;")->fetch_row()[0];
     }
 
-    public function get_archive_table_create_date()
+    public function get_archive_table_create_date($datetime_format)
     {
-        return $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 's_parser' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+        $datetime = $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 's_parser' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+        $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $datetime)->getTimestamp();
+
+        return date($datetime_format, $timestamp);
     }
+
 
     public function get_archive_students($search_query, $period_from, $period_before, $choose_from, $type_of_sort)
     {
