@@ -60,7 +60,12 @@ class DatabaseManager
 
     public function get_archive_table_create_date($datetime_format)
     {
-        $datetime = $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 's_parser' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+        try {
+            $datetime = $this->db->query("SELECT CAST(record_time AS DATETIME) AS record_date FROM StudentArchive ORDER BY record_time ASC LIMIT 1;")->fetch_row()[0];
+        } catch (mysqli_sql_exception $e) {
+            $datetime = $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+        }
+
         $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $datetime)->getTimestamp();
 
         return date($datetime_format, $timestamp);

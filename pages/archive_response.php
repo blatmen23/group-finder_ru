@@ -2,7 +2,7 @@
 require_once  __DIR__ . '/../src/helper.php';
 
 if (!isset($_SESSION['results'])) {
-    redirect("/");
+    redirect("/archive");
 }
 ?>
 
@@ -25,9 +25,20 @@ require_once __DIR__ . "/../components/head.php";
                 if ($results == "NOT FOUND") {
                     require_once "components/not_found_message.php";
                 } else {
-                    foreach ($results as $result) {
-                        require __DIR__ . "/../components/result row/archive-row.php";
-                    }
+                    foreach ($results as $result) : ?>
+                        <div class="response-row">
+                            <form href="#">
+                                <div><?= $result["student_name"] ?></div>
+                                <div>
+                                    <?php
+                                    $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $result["record_time"])->getTimestamp();
+                                    echo date("d.m.Y", $timestamp);
+                                    ?>
+                                </div>
+                            </form>
+                        </div>
+                <?php
+                    endforeach;
                 }
                 ?>
             </div>

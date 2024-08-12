@@ -8,8 +8,9 @@ $router->addRoute("/", "main.php"); // добавили главную стра�
 $router->addRoute("/response", "response.php");
 $router->addRoute("/archive", "archive.php");
 $router->addRoute("/archive_response", "archive_response.php");
-$router->addRoute("/testing", "testing.php");
-
+$router->addRoute("/reports", "reports.php");
+$router->addRoute("/reports_response", "reports_response.php");
+$router->addRoute("/report", "report.php");
 $router->route($url);
 ?>
 

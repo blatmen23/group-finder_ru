@@ -25,9 +25,15 @@ require_once __DIR__ . "/../components/head.php";
                 if ($results == "NOT FOUND") {
                     require_once "components/not_found_message.php";
                 } else {
-                    foreach ($results as $result) {
-                        require __DIR__ . "/../components/result row/response-row.php";
-                    }
+                    foreach ($results as $result) : ?>
+                        <div class="response-row">
+                            <div><?= $result["student_name"] ?>
+                                <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
+                            </div>
+                            <div><?= $result["group_name"] ?></div>
+                        </div>
+                <?php
+                    endforeach;
                 }
                 ?>
             </div>

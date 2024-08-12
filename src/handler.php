@@ -190,3 +190,55 @@ class Archive extends Handler
         return $results;
     }
 }
+
+class Reports extends Handler
+{
+    private $period_from;
+    private $period_before;
+
+    function __construct($period_from, $period_before)
+    {
+        parent::__construct();
+
+        $this->period_from = $period_from;
+        $this->period_before = $period_before;
+
+        $this->body .= "<br>" .
+            "Period from: " . $this->period_from . "<br>" .
+            "Period before: " . $this->period_before;
+    }
+
+    function validation()
+    {
+        removeValidationErrors();
+    }
+
+
+    function get_results($period_from, $period_before)
+    {
+        $results = [];
+
+        require_once __DIR__ . "/../config/config.php";
+
+        $all_reports = array_diff(scandir(__DIR__ . $reports_path), array(".", ".."));
+
+        // differences ВООБЩЕ НЕ НУЖНЫ!!!
+        foreach ($all_reports as $index => $report) {
+            $period_from_timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $period_from)->getTimestamp();
+            $period_before_timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $period_before)->getTimestamp();
+
+            $report_date = explode(".", explode("_", $report)[2])[0];
+            $timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $report_date)->getTimestamp();
+
+            if ($period_from_timestamp <= $timestamp || $timestamp <= $period_before_timestamp) {
+                $results[$index]['file_report_name'] = $report;
+                $results[$index]['report_date'] = explode(".", explode("_", $report)[2])[0];
+            }
+        }
+
+        // echo "<pre>";
+        // var_dump($results);
+
+        return $results;
+    }
+}

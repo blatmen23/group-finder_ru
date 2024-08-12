@@ -2,6 +2,7 @@
 
 :root {
   --container-width: 60vw;
+  /* --get-reports-button-width: 60v; */
   --header-height: 4rem;
 }
 
@@ -13,7 +14,7 @@
 }
 
 .wrapper a {
-  /*color: #3450e7;*/
+  /* color: #3450e7; */
   color: #ff2600;
 }
 
@@ -50,6 +51,13 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.block-space pre {
+  color: #000000;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 1.2em;
+  margin: 0 0 0 0.5em;
+}
 /*
     START ADAPTIVE
 */
@@ -105,7 +113,7 @@ footer a {
 .response-row {
   border: 2px solid rgb(173, 222, 205);
   border-radius: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
   display: grid;
   grid-template-columns: 1fr max-content;
   padding: 0.25rem;
@@ -118,7 +126,7 @@ footer a {
   /*border-bottom: 2px solid rgb(173, 222, 205);*/
 }
 
-.label-info {
+.lable__response-row {
   display: inline-block;
   padding: 2px 4px;
   font-size: 12px;
@@ -130,6 +138,34 @@ footer a {
   vertical-align: text-top;
   white-space: nowrap;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+button.lable__response-row,
+a.lable__response-row {
+  appearance: none;
+  border-radius: 3px;
+  background: none;
+  padding: 0 0.1rem;
+  margin: 0 0.1rem 0 0.1rem;
+  outline: none;
+  font: inherit;
+  /* color: inherit; */
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+a.download_button__response-row {
+  cursor: pointer;
+  border: 2px solid #21af14;
+  color: #21af14;
+  /* background-color: mediumseagreen; */
+}
+
+button.open_button__response-row {
+  cursor: pointer;
+  border: 2px solid #144daf;
+  /* border: 2px solid inherit; */
+  color: #144daf;
 }
 
 @media (max-width: 1200px) {
@@ -258,7 +294,7 @@ header {
 */
 .manual__main {
   padding-bottom: 0.25rem;
-  /*border-bottom: 3px solid rgb(173, 222, 205);*/
+  border-bottom: 3px solid rgb(173, 222, 205);
   /*margin-bottom: 0.25rem;*/
 }
 
@@ -305,6 +341,36 @@ header {
   font-size: 1rem;
   width: 100%;
   height: 100%;
+}
+
+/* отступ на страницу reports */
+
+.search-button__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button__form button {
+  background: none;
+  border: 2px solid #ff2600;
+  color: #ff2600;
+  padding: 0;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  outline: inherit;
+  padding: 0.2rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  text-align: center;
+  /* background: rgb(17, 209, 103); */
+  transition: 0.2s linear;
+}
+
+.search-button__form button:hover {
+  box-shadow: azure 0 0px 0px 40px inset;
 }
 
 /* 
