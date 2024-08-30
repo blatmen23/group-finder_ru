@@ -195,17 +195,23 @@ class Reports extends Handler
 {
     private $period_from;
     private $period_before;
+    private $choose_from;
+    private $type_of_sort;
 
-    function __construct($period_from, $period_before)
+    function __construct($period_from, $period_before,  $choose_from, $type_of_sort)
     {
         parent::__construct();
 
         $this->period_from = $period_from;
         $this->period_before = $period_before;
+        $this->choose_from = $choose_from;
+        $this->type_of_sort = $type_of_sort;
 
         $this->body .= "<br>" .
             "Period from: " . $this->period_from . "<br>" .
-            "Period before: " . $this->period_before;
+            "Period before: " . $this->period_before . "<br>" .
+            "Choose from: " . $this->choose_from . "<br>" .
+            "Type of sort: " . $this->type_of_sort;
     }
 
     function validation()
@@ -213,32 +219,30 @@ class Reports extends Handler
         removeValidationErrors();
     }
 
-
-    function get_results($period_from, $period_before)
+    function get_results()
     {
-        $results = [];
+        $response = $this->db_manager->get_reports($this->period_from, $this->period_before, $this->choose_from, $this->type_of_sort);
 
-        require_once __DIR__ . "/../config/config.php";
-
-        $all_reports = array_diff(scandir(__DIR__ . $reports_path), array(".", ".."));
-
-        // differences ВООБЩЕ НЕ НУЖНЫ!!!
-        foreach ($all_reports as $index => $report) {
-            $period_from_timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $period_from)->getTimestamp();
-            $period_before_timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $period_before)->getTimestamp();
-
-            $report_date = explode(".", explode("_", $report)[2])[0];
-            $timestamp = DateTimeImmutable::createFromFormat("Y-m-d", $report_date)->getTimestamp();
-
-            if ($period_from_timestamp <= $timestamp || $timestamp <= $period_before_timestamp) {
-                $results[$index]['file_report_name'] = $report;
-                $results[$index]['report_date'] = explode(".", explode("_", $report)[2])[0];
-            }
+        if ($response->num_rows > 1000) {
+            setValidationError('Найдено слишком много записей. Уточните временной период');
+            redirect('/reports');
         }
 
-        // echo "<pre>";
-        // var_dump($results);
+        $results = [];
+        if (mysqli_num_rows($response) > 0) {
+            while ($chunk_data = $response->fetch_assoc()) {
+                array_push($results, $chunk_data);
+            }
+        } elseif (mysqli_num_rows($response) == 0) {
+            $results = "NOT FOUND";
+        } else {
+            setValidationError('Возникла непредвиденная ошибка');
+            redirect('/reports');
+        }
 
+        if ($results != "NOT FOUND") {
+            $results = parent::complete_result($results);
+        }
         return $results;
     }
 }

@@ -26,6 +26,11 @@ select {
   cursor: pointer;
 }
 
+h4 {
+  font-size: 1.1em;
+  /* font-weight: bold; */
+}
+
 select[multiple] {
   overflow: hidden; /* скрываем полосы прокрутки */
   height: auto; /* устанавливаем автоматическую высоту */
@@ -48,10 +53,9 @@ body {
   background-color: white;
   box-shadow: 0 0 3px 1px #8c8c8c;
   margin-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
-.block-space pre {
+.block-space pre.estr {
   color: #000000;
   text-decoration: none;
   font-style: italic;
@@ -120,6 +124,12 @@ footer a {
   margin-bottom: 0.35rem;
   transition: 0.4s;
 }
+
+.in_row__response-row {
+  display: flex;
+  align-items: center; /* Выравнивание по вертикали */
+}
+
 .response-row:hover {
   background-color: azure;
   box-shadow: 0 0 4px 1px rgb(173, 222, 205);
@@ -140,11 +150,10 @@ footer a {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-button.lable__response-row,
-a.lable__response-row {
+button.lable__response-row {
   appearance: none;
   border-radius: 3px;
-  background: none;
+  background: white;
   padding: 0 0.1rem;
   margin: 0 0.1rem 0 0.1rem;
   outline: none;
@@ -154,7 +163,7 @@ a.lable__response-row {
   white-space: nowrap;
 }
 
-a.download_button__response-row {
+button.download_button__response-row {
   cursor: pointer;
   border: 2px solid #21af14;
   color: #21af14;

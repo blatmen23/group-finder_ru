@@ -27,15 +27,13 @@ require_once __DIR__ . "/../components/head.php";
                 } else {
                     foreach ($results as $result) : ?>
                         <div class="response-row">
-                            <form href="#">
-                                <div><?= $result["student_name"] ?></div>
-                                <div>
-                                    <?php
-                                    $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $result["record_time"])->getTimestamp();
+                            <div><?= $result["student_name"] . ' ' . $result["group_name"] ?>
+                                <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
+                            </div>
+                            <div><?php
+                                    $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $result["record_date"])->getTimestamp();
                                     echo date("d.m.Y", $timestamp);
-                                    ?>
-                                </div>
-                            </form>
+                                    ?></div>
                         </div>
                 <?php
                     endforeach;

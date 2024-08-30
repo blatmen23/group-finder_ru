@@ -10,7 +10,8 @@ $router->addRoute("/archive", "archive.php");
 $router->addRoute("/archive_response", "archive_response.php");
 $router->addRoute("/reports", "reports.php");
 $router->addRoute("/reports_response", "reports_response.php");
-$router->addRoute("/report", "report.php");
+$router->addRoute("/report_viewer", "report_viewer.php");
+$router->addRoute("/report_download", "report_download.php");
 $router->route($url);
 ?>
 

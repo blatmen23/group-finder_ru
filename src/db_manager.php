@@ -53,29 +53,61 @@ class DatabaseManager
         return $this->db->query($sql_query);
     }
 
-    public function get_quantity_records()
+    public function get_quantity_archive_records()
     {
-        return $this->db->query("SELECT COUNT(record_time) as quantity FROM StudentArchive;")->fetch_row()[0];
+        return $this->db->query("SELECT COUNT(record_date) as quantity FROM StudentArchive;")->fetch_row()[0];
     }
 
-    public function get_archive_table_create_date($datetime_format)
+    public function get_archive_table_create_date($date_format)
     {
-        try {
-            $datetime = $this->db->query("SELECT CAST(record_time AS DATETIME) AS record_date FROM StudentArchive ORDER BY record_time ASC LIMIT 1;")->fetch_row()[0];
-        } catch (mysqli_sql_exception $e) {
-            $datetime = $this->db->query("SELECT CREATE_TIME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+        $date = $this->db->query("SELECT record_date FROM StudentArchive ORDER BY record_date ASC LIMIT 1;")->fetch_row()[0];
+
+        if (is_null($date)) {
+            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
         }
 
-        $timestamp = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $datetime)->getTimestamp();
+        $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $date)->getTimestamp();
 
-        return date($datetime_format, $timestamp);
+        return date($date_format, $timestamp);
     }
 
 
     public function get_archive_students($search_query, $period_from, $period_before, $choose_from, $type_of_sort)
     {
-        $sql_query = "SELECT * FROM StudentArchive WHERE student_name LIKE '%{$search_query}%' AND CAST(record_time AS DATE) BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
+        $sql_query = "SELECT * FROM StudentArchive WHERE student_name LIKE '%{$search_query}%' AND record_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
 
         return $this->db->query($sql_query);
+    }
+
+    public function get_quantity_report_records()
+    {
+        return $this->db->query("SELECT COUNT(report_date) as quantity FROM ReportArchive;")->fetch_row()[0];
+    }
+
+    public function get_report_table_create_date($date_format)
+    {
+        $date = $this->db->query("SELECT report_date FROM ReportArchive ORDER BY report_date ASC LIMIT 1;")->fetch_row()[0];
+
+        if (is_null($date)) {
+            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'ReportArchive';")->fetch_row()[0];
+        }
+
+        $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $date)->getTimestamp();
+
+        return date($date_format, $timestamp);
+    }
+
+    public function get_reports($period_from, $period_before, $choose_from, $type_of_sort)
+    {
+        $sql_query = "SELECT * FROM ReportArchive WHERE report_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
+
+        return $this->db->query($sql_query);
+    }
+
+    public function get_report($report_id)
+    {
+        $sql_query = "SELECT * FROM ReportArchive WHERE report_id = {$report_id};";
+
+        return $this->db->query($sql_query)->fetch_assoc();
     }
 }

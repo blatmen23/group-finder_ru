@@ -7,8 +7,10 @@ if (!isset($_SESSION['results'])) {
 ?>
 
 <!doctype html>
-<html lang="ru">
-<input?php $title="GroupFinder: Результаты поиска в отчётах" ; require_once __DIR__ . "/../components/head.php" ; ?>
+<form?php $title="GroupFinder: Результаты поиска в отчётах" ; require_once __DIR__ . "/../components/head.php" ; ?>
+
+    <html lang="ru">
+
 
     <body>
         <div class="wrapper">
@@ -23,15 +25,24 @@ if (!isset($_SESSION['results'])) {
                         require_once "components/not_found_message.php";
                     } else {
                         foreach ($results as $index => $result) : ?>
-                            <div class="response-row">
-                                <div><?= $result['file_report_name']; ?></div>
-                                <?php require_once __DIR__ . "/../config/config.php"; ?>
-                                <form name="report" action="/report" method="post">
-                                    <input type="hidden" name="file_report_name" value="<?= $result['file_report_name'] ?>">
-                                    <a class="lable__response-row download_button__response-row" href="<?= __DIR__ .  $reports_path . '/' . $result['file_report_name']; ?>" download target="_blank">Скачать</a>
-                                    <button class="lable__response-row open_button__response-row" type="submit">Перейти</button>
-                                </form>
-                            </div>
+                    <div class="response-row">
+                        <?php $report_file_name = "report_{$result['report_date']}_{$result['report_id']}.txt" ?>
+                        <div><?= $report_file_name; ?></div>
+                        <div class="in_row__response-row">
+                            <form name="report" action="/report_viewer" method="post">
+                                <input type="hidden" name="report_id" value="<?= $result['report_id'] ?>">
+                                <input type="hidden" name="report_file_name" value="<?= $report_file_name ?>">
+                                <button class="lable__response-row open_button__response-row"
+                                    type="submit">Перейти</button>
+                            </form>
+                            <!-- <form name="report" action="/report_download" method="post">
+                                        <input type="hidden" name="report_id" value="<?= $result['report_id'] ?>">
+                                        <input type="hidden" name="report_file_name" value="<?= $report_file_name ?>">
+                                        <button class="lable__response-row download_button__response-row"
+                                            type="submit">Скачать</button>
+                                    </form> -->
+                        </div>
+                    </div>
                     <?php
                         endforeach;
                     }
@@ -44,4 +55,4 @@ if (!isset($_SESSION['results'])) {
         ?>
     </body>
 
-</html>
+    </html>

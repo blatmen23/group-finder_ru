@@ -27,12 +27,13 @@ require_once __DIR__ . "/../components/head.php";
                         <p class="title-block__main"><b>О странице</b></p>
                         <p>Движение студентов КНИТУ-КАИ - ещё одна страница нашего сайта, открывающая доступ ко всем
                             бывшим студентам нашего ВУЗа.</p>
-                        <p>Записи ведутся с <?= $db_manager->get_archive_table_create_date("d.m.Y") ?> года, и на данный
-                            момент в архиве <?= $db_manager->get_quantity_records() ?> записей.</p>
+                        <p>Записи ведутся с <?= $db_manager->get_report_table_create_date("d.m.Y") ?> года, и на данный
+                            момент в архиве <?= $db_manager->get_quantity_report_records() ?> записей.</p>
                     </div>
 
                     <p class="validation-message__main"><?= getValidationErrorMessage() ?></p>
-                    <form class="search__main" name="search-request" id="search-request" action="/src/actions/reports_handler.php" method="post">
+                    <form class="search__main" name="search-request" id="search-request"
+                        action="/src/actions/reports_handler.php" method="post">
                         <div class="search-button__form">
                             <button type="submit" class="search-button">Получить отчёты</button>
                         </div>
@@ -48,11 +49,17 @@ require_once __DIR__ . "/../components/head.php";
                         <div class="filters">
                             <label class="filter" for="period_from">
                                 <span>Период с:</span>
-                                <input type="date" id="period_from" name="period_from" value="<?= explode(".", explode("_", scandir(__DIR__ . "/../data/reports")[4])[1])[0]; ?>" min="<?= $db_manager->get_archive_table_create_date("Y-m-d"); ?>" form="search-request">
+                                <input type="date" id="period_from" name="period_from"
+                                    value="<?= $db_manager->get_report_table_create_date("Y-m-d"); ?>"
+                                    min="<?= $db_manager->get_report_table_create_date("Y-m-d"); ?>"
+                                    max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
                             <label class="filter" for="period_before">
                                 <span>Период до:</span>
-                                <input type="date" id="period_before" name="period_before" value="<?= date('Y-m-d', time()); ?>" min="<?= $db_manager->get_archive_table_create_date("Y-m-d"); ?>" max="<?= date('Y-m-d', time()); ?>" form="search-request">
+                                <input type="date" id="period_before" name="period_before"
+                                    value="<?= date('Y-m-d', time()); ?>"
+                                    min="<?= $db_manager->get_report_table_create_date("Y-m-d"); ?>"
+                                    max="<?= date('Y-m-d', time()); ?>" form="search-request">
                             </label>
                         </div>
                     </div>
@@ -64,9 +71,7 @@ require_once __DIR__ . "/../components/head.php";
                             <label class="sort" for="alph">
                                 <span>Сортировать </span>
                                 <select id="type-of-sort" name="type-of-sort" form="search-request">
-                                    <option value="record_time">по времени</option>
-                                    <option value="student_name">по имени</option>
-                                    <option value="group_name">по группе</option>
+                                    <option value="report_date">по времени</option>
                                 </select>
                             </label>
                             <label class="sort" for="alph">

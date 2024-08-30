@@ -28,7 +28,7 @@ require_once __DIR__ . "/../components/head.php";
                         <p>Архив студентов КНИТУ-КАИ - ещё одна страница нашего сайта, открывающая доступ ко всем
                             бывшим студентам нашего ВУЗа.</p>
                         <p>Записи ведутся с <?= $db_manager->get_archive_table_create_date("d.m.Y") ?> года, и на данный
-                            момент в архиве <?= $db_manager->get_quantity_records() ?> записей.</p>
+                            момент в архиве <?= $db_manager->get_quantity_archive_records() ?> записей.</p>
                     </div>
 
                     <p class="validation-message__main"><?= getValidationErrorMessage() ?></p>
@@ -78,7 +78,7 @@ require_once __DIR__ . "/../components/head.php";
                             <label class="sort" for="alph">
                                 <span>Сортировать </span>
                                 <select id="type-of-sort" name="type-of-sort" form="search-request">
-                                    <option value="record_time">по времени</option>
+                                    <option value="record_date">по времени</option>
                                     <option value="student_name">по имени</option>
                                     <option value="group_name">по группе</option>
                                 </select>
