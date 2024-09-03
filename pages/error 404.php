@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Ошибка";
+$title = "GF: Ошибка";
 require_once "components/head.php";
 ?>
 

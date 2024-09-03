@@ -14,6 +14,6 @@ $handler->send_email();
 
 $results = $handler->get_results();
 
-$_SESSION['results'] = array_reverse($results);
+$_SESSION['results'] = $results;
 
 redirect('/reports_response');

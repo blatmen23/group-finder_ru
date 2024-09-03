@@ -11,7 +11,7 @@ $db_manager->connect_db();
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Движение студентов КНИТУ-КАИ";
+$title = "GF: Движение студентов КНИТУ-КАИ";
 require_once __DIR__ . "/../components/head.php";
 ?>
 
@@ -25,7 +25,7 @@ require_once __DIR__ . "/../components/head.php";
                 <div class="block-space">
                     <div class="manual__main">
                         <p class="title-block__main"><b>О странице</b></p>
-                        <p>Движение студентов КНИТУ-КАИ - ещё одна страница нашего сайта, открывающая доступ ко всем
+                        <p>Движение студентов КНИТУ-КАИ — ещё одна страница нашего сайта, открывающая доступ ко всем
                             бывшим студентам нашего ВУЗа.</p>
                         <p>Записи ведутся с <?= $db_manager->get_report_table_create_date("d.m.Y") ?> года, и на данный
                             момент в архиве <?= $db_manager->get_quantity_report_records() ?> записей.</p>

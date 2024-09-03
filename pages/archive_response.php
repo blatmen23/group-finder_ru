@@ -9,7 +9,7 @@ if (!isset($_SESSION['results'])) {
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Результаты поиска в архиве";
+$title = "GF: Результаты поиска в архиве";
 require_once __DIR__ . "/../components/head.php";
 ?>
 
@@ -19,7 +19,7 @@ require_once __DIR__ . "/../components/head.php";
         require_once __DIR__ . "/../components/header.php";
         ?>
         <div class="work-space">
-            <div class="block-space">
+            <div class="block-space container">
                 <?php
                 $results = $_SESSION['results'];
                 if ($results == "NOT FOUND") {

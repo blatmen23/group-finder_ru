@@ -5,7 +5,7 @@ require_once  __DIR__ . '/../src/helper.php';
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Поиск студентов КНИТУ-КАИ";
+$title = "GF: Поиск студентов КНИТУ-КАИ";
 require_once __DIR__ . "/../components/head.php";
 ?>
 
@@ -26,10 +26,12 @@ require_once __DIR__ . "/../components/head.php";
                     </div>
 
                     <p class="validation-message__main"><?= getValidationErrorMessage() ?></p>
-                    <form class="search__main" name="search-request" id="search-request" action="/src/actions/response_handler.php" method="post">
+                    <form class="search__main" name="search-request" id="search-request"
+                        action="/src/actions/response_handler.php" method="post">
                         <div class="search-box__form">
                             <label class="search-input">
-                                <input name="search-query" id="input-search-query" type="text" maxlength="70" placeholder="Введите запрос" value="<?= getOldValue() ?>" />
+                                <input name="search-query" id="input-search-query" type="text" maxlength="70"
+                                    placeholder="Введите запрос" value="<?= getOldValue() ?>" />
                             </label>
 
                             <button type="submit" class="search-button">

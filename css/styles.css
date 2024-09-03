@@ -4,6 +4,10 @@
   --container-width: 60vw;
   /* --get-reports-button-width: 60v; */
   --header-height: 4rem;
+  --urls-color: #3450e7;
+  --important-color: #ff2600;
+  --submit-color: #21af14;
+  --basic-color: rgb(173, 222, 205);
 }
 
 * {
@@ -14,8 +18,7 @@
 }
 
 .wrapper a {
-  /* color: #3450e7; */
-  color: #ff2600;
+  color: var(--urls-color, #000000);
 }
 
 .wrapper p::first-letter {
@@ -115,7 +118,7 @@ footer a {
     RESPONSE
 */
 .response-row {
-  border: 2px solid rgb(173, 222, 205);
+  border: 2px solid var(--basic-color, rgb(173, 222, 205));
   border-radius: 5px;
   /* cursor: pointer; */
   display: grid;
@@ -132,8 +135,15 @@ footer a {
 
 .response-row:hover {
   background-color: azure;
-  box-shadow: 0 0 4px 1px rgb(173, 222, 205);
-  /*border-bottom: 2px solid rgb(173, 222, 205);*/
+  box-shadow: 0 0 4px 1px var(--basic-color, rgb(173, 222, 205));
+  /*border-bottom: 2px solid var(--basic-color, rgb(173, 222, 205));*/
+}
+
+.response-row__message {
+  /* cursor: pointer; */
+  padding: 0.25rem;
+  margin-bottom: 0.35rem;
+  transition: 0.4s;
 }
 
 .lable__response-row {
@@ -164,17 +174,17 @@ button.lable__response-row {
 }
 
 button.download_button__response-row {
+  padding: 0.1rem;
   cursor: pointer;
-  border: 2px solid #21af14;
-  color: #21af14;
-  /* background-color: mediumseagreen; */
+  border: 2px solid var(--submit-color, #000000);
+  color: var(--submit-color, #000000);
 }
 
 button.open_button__response-row {
+  padding: 0.1rem;
   cursor: pointer;
-  border: 2px solid #144daf;
-  /* border: 2px solid inherit; */
-  color: #144daf;
+  border: 2px solid var(--submit-color, #000000);
+  color: var(--submit-color, #000000);
 }
 
 @media (max-width: 1200px) {
@@ -258,6 +268,11 @@ header {
   width: var(--container-width);
 }
 
+.logo-img__header {
+  position: relative;
+  z-index: 1;
+}
+
 .logotype__header {
   height: var(--header-height, 100%);
   padding: 0.25rem;
@@ -273,11 +288,13 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .logo-background__header {
   height: calc(var(--header-height) / 2);
-  background-color: rgb(173, 222, 205);
+  background-color: var(--basic-color, rgb(173, 222, 205));
   font-size: calc((var(--header-height) / 2) * 0.8);
   /*font-size: 75%;*/
 }
@@ -298,23 +315,60 @@ header {
   padding-left: calc(var(--header-height) + 0.4rem);
 }
 
+.sublogo-background__header .text-holder__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sublogo-nav__header {
+  height: calc(var(--header-height) / 2);
+  display: flex;
+  align-items: center;
+}
+
+div.sublogo-nav__header > a:first-of-type {
+  border-left: 3px solid var(--basic-color, rgb(173, 222, 205));
+}
+
+.sublogo-nav__header a {
+  /* color: var(--important-color, #000000); */
+  color: #000000;
+  height: 75%;
+  padding: 0 0.4rem;
+  display: flex;
+  align-items: center;
+  text-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
+  border-right: 3px solid var(--basic-color, rgb(173, 222, 205));
+  transition: all 1s ease;
+  transform: scale(1);
+}
+
+.sublogo-nav__header a:hover {
+  color: #07a4ed;
+  transform: scale(1.045) perspective(1px);
+}
+
+a.selected-page {
+  color: var(--important-color);
+}
+
 /*
     MANUAL
 */
 .manual__main {
   padding-bottom: 0.25rem;
-  border-bottom: 3px solid rgb(173, 222, 205);
+  border-bottom: 3px solid var(--basic-color, rgb(173, 222, 205));
   /*margin-bottom: 0.25rem;*/
 }
 
 .about__main {
   padding-bottom: 0.25rem;
-  border-bottom: 3px solid rgb(173, 222, 205);
+  border-bottom: 3px solid var(--basic-color, rgb(173, 222, 205));
   margin-bottom: 0.25rem;
 }
 
 .title-block__main {
-  border-bottom: 3px solid rgb(173, 222, 205);
+  border-bottom: 3px solid var(--basic-color, rgb(173, 222, 205));
   margin-bottom: 0.25rem;
 }
 
@@ -362,8 +416,8 @@ header {
 
 .search-button__form button {
   background: none;
-  border: 2px solid #ff2600;
-  color: #ff2600;
+  border: 2px solid var(--submit-color, #000000);
+  color: var(--submit-color, #000000);
   padding: 0;
   font: inherit;
   font-weight: bold;
@@ -398,14 +452,6 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.error-page h2 {
-  color: #ff2600;
-}
-
-.error-page h2::first-letter {
-  padding-left: 0.5rem;
 }
 
 .error-404-container {

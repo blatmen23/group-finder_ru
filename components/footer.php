@@ -4,6 +4,10 @@
             <p>✉ Email: <a href="mailto:example@email.com">dolgov@group-finder.ru</a></p>
             <p>► Telegram: <a href="https://t.me/D_smm" target="_blank">@D_smm</a></p>
         </div>
-        <div class="copyright"><p>© Д. А. Долгов, 2024</p></div>
+        <div class="copyright">
+            <p>© Д. А. Долгов, 2024</p>
+        </div>
     </div>
 </footer>
+<script src="/js/sublogo_text.js"></script>
+<script src="/js/adaptive_header.js"></script>

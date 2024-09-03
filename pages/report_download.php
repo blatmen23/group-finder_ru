@@ -17,7 +17,7 @@ $body = $_SERVER['HTTP_USER_AGENT'] . "<br>" .
 <!doctype html>
 <html lang="ru">
 <?php
-$title = "GroupFinder: Скачать отчёт";
+$title = "GF: Скачать отчёт";
 require_once __DIR__ . "/../components/head.php";
 ?>
 
