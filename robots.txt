@@ -1,8 +1,8 @@
 User-agent: *
-Disallow: error*
-Disallow: response
-Disallow: archive_response
-Disallow: reports_response
+Disallow: /error*
+Disallow: /response
+Disallow: /archive_response
+Disallow: /reports_response
 Allow: /pages/*
 Allow: /*.js
 Allow: /*.css
