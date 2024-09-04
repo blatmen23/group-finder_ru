@@ -25,9 +25,6 @@ require_once __DIR__ . "/../components/head.php";
                 if ($results == "NOT FOUND") {
                     require_once "components/not_found_message.php";
                 } else {
-                    $amount = count($results);
-                    require_once "components/found_message.php";
-
                     foreach ($results as $result) : ?>
                         <div class="response-row">
                             <div><?= $result["student_name"] . ' ' . $result["group_name"] ?>

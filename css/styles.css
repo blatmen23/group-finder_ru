@@ -58,10 +58,13 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.block-space.container {
-  margin-bottom: 0.5rem;
+.block-space pre.estr {
+  color: #000000;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 1.2em;
+  margin: 0 0 0 0.5em;
 }
-
 /*
     START ADAPTIVE
 */
