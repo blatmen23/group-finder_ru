@@ -26,7 +26,7 @@ require_once __DIR__ . "/../components/head.php";
                     <div class="manual__main">
                         <p class="title-block__main"><b>О странице</b></p>
                         <p>На этой странице размещены ежедневные отчёты о движении студентов КНИТУ-КАИ. Каждый отчёт
-                            включает изменения, произошедшие за последние сутки.
+                            содержит изменения, произошедшие за последние сутки.
                         </p>
                         <p>Записи ведутся с <?= $db_manager->get_report_table_create_date("d.m.Y") ?> года, и на данный
                             момент в архиве <?= $db_manager->get_quantity_report_records() ?> записей.</p>
@@ -78,8 +78,8 @@ require_once __DIR__ . "/../components/head.php";
                             <label class="sort" for="alph">
                                 <span>Выбрать </span>
                                 <select id="choose-from" name="choose-from" form="search-request">
-                                    <option value="ASC">cначала</option>
-                                    <option value="DESC">cконца</option>
+                                    <option value="DESC">сконца</option>
+                                    <option value="ASC">сначала</option>
                                 </select>
                             </label>
                         </div>

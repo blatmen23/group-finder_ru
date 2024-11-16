@@ -28,24 +28,24 @@ if (!isset($_SESSION['results'])) {
                         require_once "components/found_message.php";
 
                         foreach ($results as $index => $result) : ?>
-                    <div class="response-row">
-                        <?php $report_file_name = "report_{$result['report_date']}_{$result['report_id']}.txt" ?>
-                        <div><?= $report_file_name; ?></div>
-                        <div class="in_row__response-row">
-                            <form name="report" action="/report_viewer" method="post">
-                                <input type="hidden" name="report_id" value="<?= $result['report_id'] ?>">
-                                <input type="hidden" name="report_file_name" value="<?= $report_file_name ?>">
-                                <button class="lable__response-row open_button__response-row"
-                                    type="submit">Перейти</button>
-                            </form>
-                            <!-- <form name="report" action="/report_download" method="post">
+                            <div class="response-row">
+                                <?php $report_file_name = "{$result['report_id']}_report_{$result['report_date']}" ?>
+                                <div><?= $report_file_name; ?></div>
+                                <div class="in_row__response-row">
+                                    <form name="report" action="/report_viewer" method="post">
+                                        <input type="hidden" name="report_id" value="<?= $result['report_id'] ?>">
+                                        <input type="hidden" name="report_file_name" value="<?= $report_file_name ?>">
+                                        <button class="lable__response-row open_button__response-row"
+                                            type="submit">Перейти</button>
+                                    </form>
+                                    <!-- <form name="report" action="/report_download" method="post">
                                         <input type="hidden" name="report_id" value="">
                                         <input type="hidden" name="report_file_name" value="">
                                         <button class="lable__response-row download_button__response-row"
                                             type="submit">Скачать</button>
                                     </form> -->
-                        </div>
-                    </div>
+                                </div>
+                            </div>
                     <?php
                         endforeach;
                     }
