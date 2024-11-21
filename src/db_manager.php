@@ -29,7 +29,7 @@ class DatabaseManager
 
     public function get_all_groups()
     {
-        $groups_response = mysqli_fetch_all($this->db->query("SELECT DISTINCT group_name FROM StudentGroups;"));
+        $groups_response = mysqli_fetch_all($this->db->query("SELECT DISTINCT group_ FROM groups_;"));
 
         $all_groups = [];
         foreach ($groups_response as $value) {
@@ -41,29 +41,29 @@ class DatabaseManager
 
     public function get_group($search_query, $institutes, $courses, $choose_from)
     {
-        $sql_query = "SELECT * FROM Students JOIN StudentGroups ON student_group = group_id JOIN Institutes ON institute = institute_id JOIN Courses ON course = course_id WHERE group_name LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course_name IN " .  $courses . "ORDER BY student_name " . $choose_from . ";";
+        $sql_query = "SELECT * FROM students JOIN groups_ ON student_group = group_id JOIN institutes ON groups_.institute = institutes.institute_id WHERE group_ LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course IN " .  $courses . "ORDER BY student " . $choose_from . ";";
 
         return $this->db->query($sql_query);
     }
 
     public function get_students($search_query, $institutes, $courses, $choose_from, $type_of_sort)
     {
-        $sql_query = "SELECT * FROM Students JOIN StudentGroups ON student_group = group_id JOIN Institutes ON institute = institute_id JOIN Courses ON course = course_id WHERE student_name LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course_name IN " .  $courses . "ORDER BY " . $type_of_sort . " " . $choose_from . ";";
+        $sql_query = "SELECT * FROM students JOIN groups_ ON student_group = group_id JOIN institutes ON groups_.institute = institutes.institute_id WHERE student LIKE '%" . $search_query . "%' AND institute_num IN " . $institutes . " AND course IN " .  $courses . "ORDER BY " . $type_of_sort . " " . $choose_from . ";";
 
         return $this->db->query($sql_query);
     }
 
     public function get_quantity_archive_records()
     {
-        return $this->db->query("SELECT COUNT(record_date) as quantity FROM StudentArchive;")->fetch_row()[0];
+        return $this->db->query("SELECT COUNT(record_date) as quantity FROM students_archive;")->fetch_row()[0];
     }
 
     public function get_archive_table_create_date($date_format)
     {
-        $date = $this->db->query("SELECT record_date FROM StudentArchive ORDER BY record_date ASC LIMIT 1;")->fetch_row()[0];
+        $date = $this->db->query("SELECT record_date FROM students_archive ORDER BY record_date ASC LIMIT 1;")->fetch_row()[0];
 
         if (is_null($date)) {
-            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'StudentArchive';")->fetch_row()[0];
+            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'students_archive';")->fetch_row()[0];
         }
 
         $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $date)->getTimestamp();
@@ -74,22 +74,22 @@ class DatabaseManager
 
     public function get_archive_students($search_query, $period_from, $period_before, $choose_from, $type_of_sort)
     {
-        $sql_query = "SELECT * FROM StudentArchive WHERE student_name LIKE '%{$search_query}%' AND record_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
+        $sql_query = "SELECT * FROM students_archive WHERE student LIKE '%{$search_query}%' AND record_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
 
         return $this->db->query($sql_query);
     }
 
     public function get_quantity_report_records()
     {
-        return $this->db->query("SELECT COUNT(report_date) as quantity FROM ReportArchive;")->fetch_row()[0];
+        return $this->db->query("SELECT COUNT(report_date) as quantity FROM reports_archive;")->fetch_row()[0];
     }
 
     public function get_report_table_create_date($date_format)
     {
-        $date = $this->db->query("SELECT report_date FROM ReportArchive ORDER BY report_date ASC LIMIT 1;")->fetch_row()[0];
+        $date = $this->db->query("SELECT report_date FROM reports_archive ORDER BY report_date ASC LIMIT 1;")->fetch_row()[0];
 
         if (is_null($date)) {
-            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'ReportArchive';")->fetch_row()[0];
+            $date = $this->db->query("SELECT CAST(CREATE_TIME AS DATE) FROM information_schema.TABLES WHERE TABLE_SCHEMA = '{$this->database}' AND TABLE_NAME = 'reports_archive';")->fetch_row()[0];
         }
 
         $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $date)->getTimestamp();
@@ -99,14 +99,14 @@ class DatabaseManager
 
     public function get_reports($period_from, $period_before, $choose_from, $type_of_sort)
     {
-        $sql_query = "SELECT * FROM ReportArchive WHERE report_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
+        $sql_query = "SELECT * FROM reports_archive WHERE report_date BETWEEN '{$period_from}' AND '{$period_before}' ORDER BY {$type_of_sort} {$choose_from};";
 
         return $this->db->query($sql_query);
     }
 
     public function get_report($report_id)
     {
-        $sql_query = "SELECT * FROM ReportArchive WHERE report_id = {$report_id};";
+        $sql_query = "SELECT * FROM reports_archive WHERE report_id = {$report_id};";
 
         return $this->db->query($sql_query)->fetch_assoc();
     }

@@ -81,8 +81,8 @@ require_once __DIR__ . "/../components/head.php";
                             <label class="sort" for="alph">
                                 <span>Сортировать </span>
                                 <select id="type-of-sort" name="type-of-sort" form="search-request">
-                                    <option value="group_name">по группе</option>
-                                    <option value="student_name">по имени</option>
+                                    <option value="group_">по группе</option>
+                                    <option value="student">по имени</option>
                                 </select>
                             </label>
                             <label class="sort" for="alph">

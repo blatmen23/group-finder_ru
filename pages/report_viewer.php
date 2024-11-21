@@ -42,8 +42,7 @@
                     );
 
                     $report = $db_manager->get_report($report_id);
-
-                    $report_json = json_decode($report['report_json'], true)
+                    $report_json = json_decode($report['report_json'], true);
                     ?>
                     <!-- <pre class="estr"><?= var_dump($report_json) ?></pre> -->
                     <i>
@@ -58,7 +57,7 @@
                         </h4>
                         <?php
                         foreach ($report_json['new_groups'] as $val) : ?>
-                            <p><?= $val['group_name'] ?></p>
+                            <p><?= $val['group_'] ?></p>
                         <?php
                         endforeach;
                         echo "<br>";
@@ -68,7 +67,7 @@
                         </h4>
                         <?php
                         foreach ($report_json['deleted_groups'] as $val) : ?>
-                            <p><?= $val['group_name'] ?></p>
+                            <p><?= $val['group_'] ?></p>
                         <?php
                         endforeach;
                         echo "<br>";
@@ -79,7 +78,7 @@
                         </h4>
                         <?php
                         foreach ($report_json['entered_students'] as $val) : ?>
-                            <p><?= $val['student_name'] . " " . $val['group_name'] ?></p>
+                            <p><?= $val['student'] . " " . $val['group_'] ?></p>
                         <?php
                         endforeach;
                         echo "<br>";
@@ -89,7 +88,7 @@
                         </h4>
                         <?php
                         foreach ($report_json['left_students'] as $val) : ?>
-                            <p><?= $val['student_name'] . " " . $val['group_name'] ?></p>
+                            <p><?= $val['student'] . " " . $val['group_'] ?></p>
                         <?php
                         endforeach;
                         echo "<br>";
@@ -100,7 +99,7 @@
                             <?php
                             $status = ($val['status'] == "promotion") ? 'повышение' : 'понижение';
                             ?>
-                            <p><?= $val['student_name'] . " " . $val['group_name'] . " - " . $status ?></p>
+                            <p><?= $val['student'] . " " . $val['group_'] . " - " . $status ?></p>
                         <?php
                         endforeach;
                         echo "<br>";
@@ -108,7 +107,7 @@
                         <h4>Студенты изменившие группу: <?= $report_json['total_group_changes'] ?></h4>
                         <?php
                         foreach ($report_json['group_changes'] as $val) : ?>
-                            <p><?= $val['student_name'] . " " . $val['last_group_name'] . " -> " . $val['new_group_name'] ?>
+                            <p><?= $val['student'] . " " . $val['old_group_'] . " -> " . $val['new_group_'] ?>
                             </p>
                         <?php
                         endforeach;

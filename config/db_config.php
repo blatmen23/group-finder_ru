@@ -3,7 +3,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database = "s_parser";
+$database = "aio_s_parser";
 
 // $hostname = "localhost";
 // $username = "dindilon20_1";
