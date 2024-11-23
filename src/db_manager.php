@@ -6,19 +6,21 @@ class DatabaseManager
     protected $username;
     protected $password;
     protected $database;
+    protected $port;
     protected $db;
 
-    public function __construct($hostname, $username, $password, $database)
+    public function __construct($hostname, $username, $password, $database, $port)
     {
         $this->hostname = $hostname;
         $this->username = $username;
         $this->password = $password;
         $this->database = $database;
+        $this->port = $port;
     }
 
     public function connect_db()
     {
-        $this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        $this->db = new mysqli($this->hostname, $this->username, $this->password, $this->database, $this->port);
 
         if (!$this->db) {
             die('Error connect to DataBase');

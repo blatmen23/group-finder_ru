@@ -52,10 +52,10 @@ require_once __DIR__ . "/../components/head.php";
                                 <span>Институт (6/6)</span>
                                 <select id="institutes" name="institutes[]" form="search-request" size="7" multiple>
                                     <option value="0" selected>Выбрать всё</option>
-                                    <option value="1" selected>1 ИАНТЭ</option>
+                                    <option value="1" selected>1 ИАНТЭ + ТК</option>
                                     <option value="2" selected>2 ФМФ</option>
                                     <option value="3" selected>3 ИАЭП</option>
-                                    <option value="4" selected>4 ИКТЗИ</option>
+                                    <option value="4" selected>4 ИКТЗИ + КИТ</option>
                                     <option value="5" selected>5 ИРЭФ-ЦТ</option>
                                     <option value="6" selected>6 ИИЭиП</option>
                                 </select>

@@ -26,12 +26,12 @@ require_once __DIR__ . "/../components/head.php";
                     require_once "components/not_found_message.php";
                 } else {
                     foreach ($results as $result) : ?>
-                <div class="response-row">
-                    <div><?= $result["student_name"] ?>
-                        <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
-                    </div>
-                    <div><?= $result["group_name"] ?></div>
-                </div>
+                        <div class="response-row">
+                            <div><?= $result["student"] ?>
+                                <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
+                            </div>
+                            <div><?= $result["group_"] ?></div>
+                        </div>
                 <?php
                     endforeach;
                 }

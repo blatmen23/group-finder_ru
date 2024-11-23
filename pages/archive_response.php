@@ -26,15 +26,15 @@ require_once __DIR__ . "/../components/head.php";
                     require_once "components/not_found_message.php";
                 } else {
                     foreach ($results as $result) : ?>
-                        <div class="response-row">
-                            <div><?= $result["student_name"] . ' ' . $result["group_name"] ?>
-                                <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
-                            </div>
-                            <div><?php
+                <div class="response-row">
+                    <div><?= $result["student"] . ' ' . $result["group_"] ?>
+                        <?php if ($result["leader"]) { ?> <span class="lable__response-row">Староста</span><?php } ?>
+                    </div>
+                    <div><?php
                                     $timestamp = DateTimeImmutable::createFromFormat('Y-m-d', $result["record_date"])->getTimestamp();
                                     echo date("d.m.Y", $timestamp);
                                     ?></div>
-                        </div>
+                </div>
                 <?php
                     endforeach;
                 }

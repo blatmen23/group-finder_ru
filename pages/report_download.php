@@ -32,7 +32,7 @@ require_once __DIR__ . "/../components/head.php";
                 require __DIR__ . "/../config/db_config.php";
                 require_once __DIR__ . "/../src/db_manager.php";
 
-                $db_manager = new DatabaseManager($hostname, $username, $password, $database);
+                $db_manager = new DatabaseManager($hostname, $username, $password, $database, $port);
                 $db_manager->connect_db();
 
                 $report_id = $_POST['report_id'];

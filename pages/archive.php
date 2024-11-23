@@ -4,7 +4,7 @@ require_once  __DIR__ . '/../src/helper.php';
 require_once __DIR__ . '/../config/db_config.php';
 require_once __DIR__ . '/../src/db_manager.php';
 
-$db_manager = new DatabaseManager($hostname, $username, $password, $database);
+$db_manager = new DatabaseManager($hostname, $username, $password, $database, $port);
 $db_manager->connect_db();
 ?>
 
@@ -25,8 +25,10 @@ require_once __DIR__ . "/../components/head.php";
                 <div class="block-space">
                     <div class="manual__main">
                         <p class="title-block__main"><b>О странице</b></p>
-                        <p>Архив студентов КНИТУ-КАИ — ещё одна страница нашего сайта, открывающая доступ ко всем
-                            бывшим студентам нашего ВУЗа.</p>
+                        <p>Архив нашего университета включает в себя всех студентов, которые когда-либо обучались в
+                            КНИТУ-КАИ.
+                            Это не только выпускники, но и все, кто поступил в наш вуз и на данный момент уже не учится
+                            у нас.</p>
                         <p>Записи ведутся с <?= $db_manager->get_archive_table_create_date("d.m.Y") ?> года, на данный
                             момент в архиве <?= $db_manager->get_quantity_archive_records() ?> записей.</p>
                     </div>

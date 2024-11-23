@@ -1,3 +1,8 @@
-User-agent: * # будет использована всеми роботами
+User-agent: *
+Disallow: /error*
 Disallow: /response
-Host: https://group-finder.ru
+Disallow: /archive_response
+Disallow: /reports_response
+Allow: /pages/*
+Allow: /*.js
+Allow: /*.css

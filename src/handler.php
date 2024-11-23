@@ -14,7 +14,7 @@ class Handler
         require __DIR__ . "/../config/db_config.php";
         require_once __DIR__ . "/db_manager.php";
 
-        $this->db_manager = new DatabaseManager($hostname, $username, $password, $database);
+        $this->db_manager = new DatabaseManager($hostname, $username, $password, $database, $port);
         $this->db_manager->connect_db();
     }
 
