@@ -1,3 +1,5 @@
 # GroupFinder
 
-Find / Students / Groups / s-parser
+Find / Students / Groups / aio-s-parser
+
+site: https://group-finder.ru/
